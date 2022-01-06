@@ -8,23 +8,27 @@ file_path = resource_filename(__name__, os.path.join("data", "ECMWF_IFS-ea-0051_
 
 data = xr.open_dataset(file_path)
 
-# testvalues
-lat = 5
-t = np.datetime64('2020-12-01')
 
-data_sel = data.sel(latitude = lat, time = t).mean(dim="longitude")
+def calc_cpt(lat):
+    t = np.datetime64('2020-12-01')
+    # slice = xr.DataArray(np.linspace(lat[0], lat[1], 2))
+    data_sel = data.sel(latitude = slice(lat[0], lat[1])).sel(time = t).mean(dim="longitude")
+    data_sel = data_sel.mean(dim="latitude")
 
-temp_min = data_sel.temperature.min()
-alt_temp_min = data_sel.temperature.idxmin()
+    cpt_temp = data_sel.temperature.min()
+    cpt_alt = data_sel.temperature.idxmin()
 
-fig, axs = plt.subplots(2)
-fig.suptitle(f"latitude: {lat}, time {t}")
-axs[0].plot(data_sel.altitude, data_sel.temperature)
-axs[0].set_ylabel("temperature")
-axs[0].set_xlabel("altitude")
-axs[0].annotate(f"CPT: \n ({alt_temp_min.values:.0f}, {temp_min.values:.2f})", xy=(alt_temp_min, temp_min), xytext=(alt_temp_min, temp_min + 15),
-             arrowprops=dict(arrowstyle="->",
-                            connectionstyle="arc3"),
-             horizontalalignment="center",
-             )
-fig.savefig("CPT.png")
+    return data_sel, cpt_alt, cpt_temp
+
+def cpt_fig(lat, data_sel, cpt_alt, cpt_temp):
+    fig, axs = plt.subplots(2)
+    fig.suptitle(f"latitude: {lat}, time {lat}")
+    axs[0].plot(data_sel.altitude, data_sel.temperature)
+    axs[0].set_ylabel("temperature")
+    axs[0].set_xlabel("altitude")
+    axs[0].annotate(f"CPT: \n ({cpt_alt.values:.0f}, {cpt_temp.values:.2f})", xy=(cpt_alt, cpt_temp),
+                    xytext=(cpt_alt, cpt_temp + 15),
+                    arrowprops=dict(arrowstyle="->", connectionstyle="arc3"),
+                    horizontalalignment="center",
+                    )
+    fig.savefig("CPT.png")
