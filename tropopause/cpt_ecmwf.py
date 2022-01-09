@@ -30,9 +30,9 @@ def calc_cpt(lat, time):
         data_sel.latitude_bounds.values.max(),
     )
     data_sel = data_sel.mean(dim="latitude")
+
     data_sel.attrs["lat_limit"] = lat_limit
+    data_sel.attrs["cpt_temp"] = data_sel.temperature.min()
+    data_sel.attrs["cpt_alt"] = data_sel.temperature.idxmin()
 
-    cpt_temp = data_sel.temperature.min()
-    cpt_alt = data_sel.temperature.idxmin()
-
-    return data_sel, cpt_alt, cpt_temp
+    return data_sel

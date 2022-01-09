@@ -1,6 +1,6 @@
 import argparse
 
-from . import cpt
+from . import cpt_ecmwf
 from . import cpt_metop
 from . import cpt_figure
 
@@ -25,6 +25,6 @@ def tropopause():
 
     args = parser.parse_args()
 
-    data_sel, cpt_alt, cpt_temp = cpt.calc_cpt(args.lat, args.time)
-    data_METOP = cpt_metop.calc_cpt(args.lat)
-    cpt_figure.cpt_fig(data_sel, cpt_alt, cpt_temp, data_METOP)
+    data_ecmwf = cpt_ecmwf.calc_cpt(args.lat, args.time)
+    data_metop = cpt_metop.calc_cpt(args.lat)
+    cpt_figure.cpt_fig(data_ecmwf, data_metop)
