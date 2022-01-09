@@ -18,8 +18,10 @@ def calc_cpt(lat):
         np.round(data_sel.latitude.values.min(), 2),
         np.round(data_sel.latitude.values.max(), 2),
     )
-    time_limit = [data_sel.time.values.min().astype('datetime64[m]').astype('str'),
-                  data_sel.time.values.max().astype('datetime64[m]').astype('str')]
+    time_limit = [
+        data_sel.time.values.min().astype("datetime64[m]").astype("str"),
+        data_sel.time.values.max().astype("datetime64[m]").astype("str"),
+    ]
     data_sel = data_sel.mean("n_event")
     data_sel.attrs["lat_limit"] = lat_limit
     data_sel.attrs["time_limit"] = time_limit
