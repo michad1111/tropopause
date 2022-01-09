@@ -11,7 +11,6 @@ data = xr.open_dataset(file_path)
 
 def calc_cpt(lat):
     t = np.datetime64('2020-12-01')
-    # slice = xr.DataArray(np.linspace(lat[0], lat[1], 2))
     data_sel = data.sel(latitude = slice(lat[0], lat[1])).sel(time = t).mean(dim="longitude")
     data_sel = data_sel.mean(dim="latitude")
 

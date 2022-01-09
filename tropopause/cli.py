@@ -1,9 +1,9 @@
 import argparse
 
-from . import tropopause
+from . import cpt
 
 
-def temp_anomalies_graz():
+def tropopause():
     """Latitude boundaries for CPT calculation"""
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -16,5 +16,5 @@ def temp_anomalies_graz():
 
     args = parser.parse_args()
 
-    data_sel, cpt_alt, cpt_temp = tropopause.calc_cpt(args.lat)
-    tropopause.cpt_fig(args.lat, data_sel, cpt_alt, cpt_temp)
+    data_sel, cpt_alt, cpt_temp = cpt.calc_cpt(args.lat)
+    cpt.cpt_fig(args.lat, data_sel, cpt_alt, cpt_temp)
