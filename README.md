@@ -3,7 +3,8 @@
 ## Michael Hadwiger - 11814638
 
 This repository includes an installable python module for analyzing measurement 
-data of the tropopause. The module was developed for an exercise within the course
+data of the tropopause (ECMWF ERA5 reanalysis and European MMETOP-satellite). 
+The module was developed for an exercise within the course
 "411.045 Selected Topics in Climate Science (Python for climate and environmental 
 scientists)" at the KFU Graz in the winter term 2021/22.
 
@@ -11,10 +12,10 @@ The repository structure is based on the example repository created by Florian
 Ladstädter (https://gitlab.com/flad/minimal_example/)
 
 The package provides a shell script `tropopause` with the following required arguments:
-- `--asdf`: asdf.
+- `--lat`: Two integers as the boundaries of the latitude interval of interest.
 
 Additional optional arguments:
-- `--asdf`: asdf.
+- `--time`: Specify the month of the measurement to be an analyzed from the ECMWF data. Format YYYY-MM. Default: 2020-12
 
 For further information please see `tropopause --help`. 
 
@@ -50,3 +51,5 @@ python -m pip install -e .
 
 ## Requirements
 - `xarray`
+- `numpy`
+- `matplotlib`
