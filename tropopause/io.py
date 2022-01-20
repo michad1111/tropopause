@@ -15,11 +15,13 @@ file_path_METOP = resource_filename(
     os.path.join("data", "METOP-A_GPS_2020-01-01_OPSv5.6.2_UCAR-2016.0120_L2.nc"),
 )
 
+
 def read_ecmwf():
     """Opens ECMWF file and stores the data in xarray dataset"""
     print("Read ECMWF")
     ds = xr.open_dataset(file_path_ECMWF)
     return ds
+
 
 def read_metop():
     """Opens METOP file and stores the data in xarray dataset"""
