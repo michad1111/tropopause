@@ -26,5 +26,5 @@ def read_ecmwf():
 def read_metop():
     """Opens METOP file and stores the data in xarray dataset"""
     print("Read METOP")
-    ds = xr.open_dataset(file_path_ECMWF)
+    ds = xr.open_dataset(file_path_METOP)
     return ds

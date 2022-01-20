@@ -1,7 +1,7 @@
 import argparse
 
-from . import cpt_ecmwf
-from . import cpt_metop
+from . import cpt
+from . import io
 from . import cpt_figure
 
 
@@ -24,7 +24,13 @@ def tropopause():
     )
 
     args = parser.parse_args()
+    if args.lat[0] >= args.lat[1]:
+        parser.error("Second latitude value must be larger than first latitude value.")
 
-    data_ecmwf = cpt_ecmwf.calc_cpt(args.lat, args.time)
-    data_metop = cpt_metop.calc_cpt(args.lat)
-    cpt_figure.cpt_fig(data_ecmwf, data_metop)
+    if (args.lat[0] < -90) or (args.lat[1] > 90):
+        parser.error("latitude values need to be within [-90, 90].")
+
+    data = {}
+    data["ecmwf"] = cpt.calc_from_gridded(io.read_ecmwf(), args.lat, args.time)
+    data["metop"] = cpt.calc_from_index_based(io.read_metop(), args.lat)
+    cpt_figure.cpt_fig(data)
