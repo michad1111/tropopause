@@ -16,10 +16,10 @@ file_path_METOP = resource_filename(
 )
 
 
-def read_ecmwf():
+def read_ecmwf(filepath=file_path_ECMWF):
     """Opens ECMWF file and stores the data in xarray dataset"""
     print("Read ECMWF")
-    ds = xr.open_dataset(file_path_ECMWF)
+    ds = xr.open_dataset(filepath)
     return ds
 
 
