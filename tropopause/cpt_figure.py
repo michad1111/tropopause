@@ -8,11 +8,11 @@ def cpt_fig(data):
         ax[idx].plot(ds.altitude, ds.temperature, label=label)
         alt = ds.cpt_alt.values
         temp = ds.cpt_temp.values
-        temp_delta = ds.temperature.max()-ds.temperature.min()
+        temp_delta = ds.temperature.max() - ds.temperature.min()
         ax[idx].annotate(
             f"CPT: \n ({alt:.0f}, {temp:.2f})",
             xy=(alt, temp),
-            xytext=(alt, temp + temp_delta*0.25),
+            xytext=(alt, temp + temp_delta * 0.25),
             arrowprops=dict(arrowstyle="->", connectionstyle="arc3"),
             horizontalalignment="center",
         )

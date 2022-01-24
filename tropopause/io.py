@@ -20,6 +20,7 @@ file_path_example_gridded = resource_filename(
     os.path.join("../tests/data", "example_gridded.nc"),
 )
 
+
 def read_gridded(filename):
     """Opens gridded datafile and stores the data in xarray dataset"""
     match filename:
@@ -29,7 +30,8 @@ def read_gridded(filename):
         case "example_gridded":
             filepath = file_path_example_gridded
             print("Read exmaple_gridded")
-        case _: raise NameError(f"File {filename} not pre-defined")
+        case _:
+            raise NameError(f"File {filename} not pre-defined")
     ds = xr.open_dataset(filepath)
     return ds
 

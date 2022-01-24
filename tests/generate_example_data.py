@@ -20,4 +20,6 @@ ds = xr.Dataset(data_vars={"temperature": da})
 ds["temperature"].attrs["units"] = "K"
 print(ds)
 
-ds.to_netcdf(path="../tests/data/example_gridded.nc", mode="w", format="NETCDF3_CLASSIC")
+ds.to_netcdf(
+    path="../tests/data/example_gridded.nc", mode="w", format="NETCDF3_CLASSIC"
+)

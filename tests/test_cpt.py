@@ -26,6 +26,7 @@ def test_cpt_index():
     assert ds.time_limit.size == 2
     assert ds.lat_limit.size == 2
 
+
 def test_cpt_example():
     ds = cpt.calc_from_gridded(io.read_gridded("example_gridded"), lat_range, time)
     assert ds.cpt_temp.values > 0

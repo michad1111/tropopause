@@ -25,10 +25,10 @@ def calc_from_gridded(ds, lat, time):
         ]
     except AttributeError:
         lat_val = ds_sel.latitude.values
-        lat_spacing = lat_val[1]- lat_val[0]
+        lat_spacing = lat_val[1] - lat_val[0]
         lat_limit = [
-            ds_sel.latitude.values.min() - lat_spacing/2,
-            ds_sel.latitude.values.max() + lat_spacing/2,
+            ds_sel.latitude.values.min() - lat_spacing / 2,
+            ds_sel.latitude.values.max() + lat_spacing / 2,
         ]
     ds_sel = ds_sel.mean(dim="latitude", keep_attrs=True)
     ds_sel["lat_limit"] = lat_limit

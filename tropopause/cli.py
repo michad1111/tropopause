@@ -28,7 +28,7 @@ def tropopause():
         type=str,
         nargs="+",
         default=("ecmwf", "metop"),
-        help="specify data source; options: ecmwf, metop, example_gridded; default: ecmwf, metop"
+        help="specify data source; options: ecmwf, metop, example_gridded; default: ecmwf, metop; a minimum of 2 sources if required",
     )
 
     args = parser.parse_args()
@@ -44,13 +44,19 @@ def tropopause():
         raise AttributeError("A minimum of two sources is required")
 
     if "ecmwf" in args.source:
-        data["ecmwf"] = cpt.calc_from_gridded(io.read_gridded("ecwmf"), args.lat, args.time)
+        data["ecmwf"] = cpt.calc_from_gridded(
+            io.read_gridded("ecwmf"), args.lat, args.time
+        )
 
     if "metop" in args.source:
-        data["metop"] = cpt.calc_from_index_based(io.read_index_based("metop"), args.lat)
+        data["metop"] = cpt.calc_from_index_based(
+            io.read_index_based("metop"), args.lat
+        )
 
     if "example_gridded" in args.source:
-        data["example_gridded"] = cpt.calc_from_gridded(io.read_gridded("example_gridded"), args.lat, args.time)
+        data["example_gridded"] = cpt.calc_from_gridded(
+            io.read_gridded("example_gridded"), args.lat, args.time
+        )
 
     if len(data) < 2:
         raise AttributeError("A minimum of two valid sources is required")
