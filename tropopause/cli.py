@@ -22,6 +22,13 @@ def tropopause():
         default="2020-12",
         help="time for tropopause analysis format YYYY-MM (default: 2020-12)",
     )
+    parser.add_argument(
+        "--source",
+        required=False,
+        type=str,
+        nargs="+",
+        default=("ecwmf", "metop")
+    )
 
     args = parser.parse_args()
     if args.lat[0] >= args.lat[1]:
@@ -31,6 +38,13 @@ def tropopause():
         parser.error("latitude values need to be within [-90, 90].")
 
     data = {}
-    data["ecmwf"] = cpt.calc_from_gridded(io.read_ecmwf(), args.lat, args.time)
-    data["metop"] = cpt.calc_from_index_based(io.read_metop(), args.lat)
+
+    if "ecwmf" in args.source:
+        data["ecmwf"] = cpt.calc_from_gridded(io.read_gridded("ecwmf"), args.lat, args.time)
+
+    if "metop" in args.source:
+        data["metop"] = cpt.calc_from_index_based(io.read_metop(), args.lat)
+
+    if "example_gridded" in args.source:
+        data["example_gridded"] = cpt.calc_from_gridded(io.read_gridded("example_gridded"), args.lat, args.time)
     cpt_figure.cpt_fig(data)

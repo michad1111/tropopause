@@ -15,10 +15,20 @@ file_path_METOP = resource_filename(
     os.path.join("data", "METOP-A_GPS_2020-01-01_OPSv5.6.2_UCAR-2016.0120_L2.nc"),
 )
 
+file_path_example_gridded = resource_filename(
+    __name__,
+    os.path.join("../tests/data", "example_gridded.nc"),
+)
 
-def read_ecmwf(filepath=file_path_ECMWF):
-    """Opens ECMWF file and stores the data in xarray dataset"""
-    print("Read ECMWF")
+def read_gridded(filepath=file_path_ECMWF):
+    """Opens data file with gridded data and stores the data in xarray dataset"""
+    match filepath:
+        case "ecwmf":
+            filepath = file_path_ECMWF
+            print("Read ECMWF")
+        case "example_gridded":
+            filepath = file_path_example_gridded
+            print("Read exmaple_gridded")
     ds = xr.open_dataset(filepath)
     return ds
 

@@ -1,15 +1,14 @@
 import numpy as np
 from tropopause import cpt
 from tropopause import io
-from pkg_resources import resource_filename
-import os
+
 
 lat_range = (-50, 50)
 time = np.datetime64("2021-12")
 
 
 def test_cpt_gridded():
-    ds = cpt.calc_from_gridded(io.read_ecmwf(), lat_range, time)
+    ds = cpt.calc_from_gridded(io.read_gridded("ecwmf"), lat_range, time)
     assert ds.cpt_temp.values > 0
     assert ds.cpt_alt.values > 0
     assert ds.temperature.ndim == 1
@@ -28,11 +27,7 @@ def test_cpt_index():
     assert ds.lat_limit.size == 2
 
 def test_cpt_example():
-    file_path = resource_filename(
-        __name__,
-        os.path.join("data", "example_gridded.nc"),
-    )
-    ds = cpt.calc_from_gridded(io.read_ecmwf(file_path), lat_range, time)
+    ds = cpt.calc_from_gridded(io.read_gridded("example_gridded"), lat_range, time)
     assert ds.cpt_temp.values > 0
     assert ds.cpt_alt.values > 0
     assert ds.temperature.ndim == 1
