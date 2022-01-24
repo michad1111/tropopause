@@ -20,21 +20,30 @@ file_path_example_gridded = resource_filename(
     os.path.join("../tests/data", "example_gridded.nc"),
 )
 
-def read_gridded(filepath=file_path_ECMWF):
-    """Opens data file with gridded data and stores the data in xarray dataset"""
-    match filepath:
+def read_gridded(filename):
+    """Opens gridded datafile and stores the data in xarray dataset"""
+    match filename:
         case "ecwmf":
             filepath = file_path_ECMWF
             print("Read ECMWF")
         case "example_gridded":
             filepath = file_path_example_gridded
             print("Read exmaple_gridded")
+        case _: raise NameError(f"File {filename} not pre-defined")
     ds = xr.open_dataset(filepath)
     return ds
 
 
-def read_metop():
-    """Opens METOP file and stores the data in xarray dataset"""
-    print("Read METOP")
-    ds = xr.open_dataset(file_path_METOP)
+def read_index_based(filename):
+    """Opens index based datafile and stores the data in xarray dataset"""
+    match filename:
+        case "metop":
+            filepath = file_path_METOP
+            print("Read METOP")
+        case "example_index":
+            # filepath = file_path_example_index # TODO: generate example data
+            print("Read exmaple_index")
+        case _:
+            raise NameError(f"File {filename} not pre-defined")
+    ds = xr.open_dataset(filepath)
     return ds
