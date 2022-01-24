@@ -16,8 +16,8 @@ da = xr.DataArray(
         "longitude": [100.0, 110.0],
     },
 )
-ds = xr.Dataset(data_vars={"temp": da})
-ds["temp"].attrs["units"] = "K"
+ds = xr.Dataset(data_vars={"temperature": da})
+ds["temperature"].attrs["units"] = "K"
 print(ds)
 
-ds.to_netcdf(path="data/example.nc", mode="w", format="NETCDF3_CLASSIC")
+ds.to_netcdf(path="../tests/data/example_gridded.nc", mode="w", format="NETCDF3_CLASSIC")

@@ -15,6 +15,6 @@ def test_io_metop():
 def test_io_example():
     file_path = resource_filename(
         __name__,
-        os.path.join("data", "example.nc"),
+        os.path.join("data", "example_gridded.nc"),
     )
     assert type(io.read_ecmwf(file_path)) == type(xr.Dataset())

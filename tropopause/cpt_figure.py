@@ -25,5 +25,5 @@ def cpt_fig(data):
             )
         ax[idx].set_ylabel("temperature / K")
         ax[idx].legend()
-    ax[1].set_xlabel("altitude / m")
+    ax[-1].set_xlabel("altitude / m")
     fig.savefig("CPT.png")
