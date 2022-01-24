@@ -7,7 +7,7 @@ def test_io_ecmwf():
 
 
 def test_io_metop():
-    assert type(io.read_metop()) == type(xr.Dataset())
+    assert type(io.read_index_based("metop")) == type(xr.Dataset())
 
 
 def test_io_example():

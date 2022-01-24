@@ -18,7 +18,7 @@ def test_cpt_gridded():
 
 
 def test_cpt_index():
-    ds = cpt.calc_from_index_based(io.read_metop(), lat_range)
+    ds = cpt.calc_from_index_based(io.read_index_based("metop"), lat_range)
     assert ds.cpt_temp.values > 0
     assert ds.cpt_alt.values > 0
     assert ds.temperature.ndim == 1
